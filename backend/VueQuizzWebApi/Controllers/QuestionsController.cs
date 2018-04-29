@@ -12,6 +12,14 @@ namespace VueQuizzWebApi.Controllers
     [Route("api/Questions")]
     public class QuestionsController : Controller
     {
+
+        readonly QuizContext DBContext;
+
+        public QuestionsController(QuizContext DBContext)
+        {
+            this.DBContext = DBContext;
+        }
+
         // GET api/questions
         [HttpGet]
         public IEnumerable<Question> Get()
@@ -35,6 +43,8 @@ namespace VueQuizzWebApi.Controllers
         [HttpPost]
         public void Post([FromBody]Models.Question value)
         {
+            // Add a test question
+            this.DBContext.Add(new Question() { Text = "Test" });
         }
     }
 }

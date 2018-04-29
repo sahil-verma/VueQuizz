@@ -38,6 +38,7 @@ namespace VueQuizzWebApi
 
             // configure DbContext to use an in memory database
             services.AddDbContext<QuizContext>(options => options.UseInMemoryDatabase("quiz"));
+
             services.AddMvc();
         }
 
