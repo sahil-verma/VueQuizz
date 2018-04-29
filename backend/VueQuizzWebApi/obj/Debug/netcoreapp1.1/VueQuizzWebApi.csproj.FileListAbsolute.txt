@@ -1,0 +1,9 @@
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\bin\Debug\netcoreapp1.1\VueQuizzWebApi.deps.json
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\bin\Debug\netcoreapp1.1\VueQuizzWebApi.runtimeconfig.json
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\bin\Debug\netcoreapp1.1\VueQuizzWebApi.runtimeconfig.dev.json
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\bin\Debug\netcoreapp1.1\VueQuizzWebApi.dll
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\obj\Debug\netcoreapp1.1\VueQuizzWebApi.csprojResolveAssemblyReference.cache
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\obj\Debug\netcoreapp1.1\VueQuizzWebApi.AssemblyInfo.cs
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\bin\Debug\netcoreapp1.1\VueQuizzWebApi.pdb
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\obj\Debug\netcoreapp1.1\VueQuizzWebApi.dll
+C:\Users\Pranav Kural\Desktop\Courses\Self-Paced\sahily\VueQuizz\backend\VueQuizzWebApi\obj\Debug\netcoreapp1.1\VueQuizzWebApi.pdb
