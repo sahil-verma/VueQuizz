@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
+  <div id="question-quiz" class="containter has-text-centered">
+    <h1 class="title">VueQuizz</h1>
+    <h2 class="subtitle">An Aamazingly Awesome Quiz</h2>
     <AddQuestion />
   </div>
 </template>
@@ -16,3 +17,5 @@ import AddQuestion from '@/components/AddQuestion.vue'; // @ is an alias to /src
 })
 export default class QuestionsForm extends Vue {}
 </script>
+
+
