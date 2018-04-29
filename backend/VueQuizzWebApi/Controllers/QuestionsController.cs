@@ -41,10 +41,11 @@ namespace VueQuizzWebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]Models.Question value)
+        public void Post([FromBody]Question question)
         {
             // Add a test question
-            this.DBContext.Add(new Question() { Text = "Test" });
+            this.DBContext.Questions.Add(question);
+            this.DBContext.SaveChanges();
         }
     }
 }

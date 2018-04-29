@@ -12,6 +12,6 @@ namespace VueQuizzWebApi
         public QuizContext(DbContextOptions<QuizContext> options) : base(options) { }
 
         // dataset for questions
-        public DbSet<Models.Question> QuestionsDb { get; set; }
+        public DbSet<Models.Question> Questions { get; set; }
     }
 }

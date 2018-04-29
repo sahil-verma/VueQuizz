@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "ee82a7ae218cb98d20fef2becd3060e958bf58ee"
+    "signature": "b115ec44bf1849536e3982f60681461c3d1208df"
   },
   "compilationOptions": {
     "defines": [
@@ -29,6 +29,7 @@
           "Microsoft.AspNetCore.StaticFiles": "1.1.2",
           "Microsoft.EntityFrameworkCore": "1.1.5",
           "Microsoft.EntityFrameworkCore.Design": "1.1.2",
+          "Microsoft.EntityFrameworkCore.InMemory": "1.1.5",
           "Microsoft.EntityFrameworkCore.Relational": "1.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.2",
@@ -820,6 +821,18 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
+        }
+      },
+      "microsoft.entityframeworkcore.inmemory/1.1.5": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.1.5",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
         }
       },
       "microsoft.entityframeworkcore.relational/1.1.5": {
@@ -3791,6 +3804,13 @@
       "sha512": "sha512-TFbj0fFE5BWJptL0BKhYOED0QOqY4VxApeLn8r9q8cINxyEj0XgjORl/a3Cp96CeASE5zsQeyMwaQCBRH+roag==",
       "path": "microsoft.entityframeworkcore.design/1.1.2",
       "hashPath": "microsoft.entityframeworkcore.design.1.1.2.nupkg.sha512"
+    },
+    "microsoft.entityframeworkcore.inmemory/1.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zDakQDKh9W1U+60p1I2RrKA8dTh9bXBrvwqrsP5a492KTUjWYCUOQFzI2S64Lv7F953Vlfi2tF1KFn6bP7S3jQ==",
+      "path": "microsoft.entityframeworkcore.inmemory/1.1.5",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.1.1.5.nupkg.sha512"
     },
     "microsoft.entityframeworkcore.relational/1.1.5": {
       "type": "package",
