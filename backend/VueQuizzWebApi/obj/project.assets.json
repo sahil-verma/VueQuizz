@@ -1004,6 +1004,19 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/1.1.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.1.5",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/1.1.5": {
         "type": "package",
         "dependencies": {
@@ -4959,6 +4972,19 @@
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.xml",
         "microsoft.entityframeworkcore.design.1.1.2.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/1.1.5": {
+      "sha512": "zDakQDKh9W1U+60p1I2RrKA8dTh9bXBrvwqrsP5a492KTUjWYCUOQFzI2S64Lv7F953Vlfi2tF1KFn6bP7S3jQ==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/1.1.5",
+      "files": [
+        "lib/net451/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net451/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.1.1.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/1.1.5": {
@@ -10751,6 +10777,7 @@
       "Microsoft.AspNetCore.StaticFiles >= 1.1.2",
       "Microsoft.EntityFrameworkCore >= 1.1.5",
       "Microsoft.EntityFrameworkCore.Design >= 1.1.2",
+      "Microsoft.EntityFrameworkCore.InMemory >= 1.1.5",
       "Microsoft.EntityFrameworkCore.Relational >= 1.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.2",
@@ -10797,6 +10824,10 @@
             "version": "1.1.2"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
+            "target": "Package",
+            "version": "1.1.5"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
             "version": "1.1.5"
           },
