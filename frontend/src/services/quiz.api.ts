@@ -15,48 +15,52 @@ export class QuizApiService {
         this.testConnection();
     }
 
-    //GET: make a get request for questions
+    // TEST: testing api connection
     testConnection (): void {
-        console.log("Called");
-        // TEST: testing api connection
-        this.quizAPI.get('questions')
+        // GET: making a test get request
+        this.quizAPI.get('questions/test')
         .then((response:any) => console.log(`
             QuizWebApi test connection successful
             ==========================
             Test response: ${response.data}
             `))
-        .catch((error: any) => {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(`
-                    QuizWebApi connection testing failed
-                    ====================================
-                    Error data: ${JSON.stringify(error.response.data)}
-                    Error status: ${error.response.status}
-                    Error headers: ${JSON.stringify(error.response.headers)}
-                `);
-              } else if (error.request) {
-                // The request was made but no response was received
-                console.log(`
-                QuizWebApi connection testing failed
-                ====================================
-                Error Request: ${JSON.stringify(error.request)}
-                `);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log(`
-                    QuizWebApi connection testing failed
-                    ====================================
-                    Error Request: ${error.message}
-                `);
-              }
-              console.log("Error config", error.config);
-        })
+        .catch((error: any) => this.handleRequestErrors(error));
     }
 
     //POST: post a question
     postQuestion(question: Object) {
-        console.dir(question);
+        console.log("Posting a new question");
+        this.quizAPI.post('questions', question)
+        .then((response:any) => console.log("Response status", response.status))
+        .catch((error:any) => this.handleRequestErrors(error));
+    }
+
+    handleRequestErrors(error:any) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(`
+            QuizWebApi connection testing failed
+            ====================================
+            Error data: ${JSON.stringify(error.response.data)}
+            Error status: ${error.response.status}
+            Error headers: ${JSON.stringify(error.response.headers)}
+            `);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.log(`
+            QuizWebApi connection testing failed
+            ====================================
+            Error Request: ${JSON.stringify(error.request)}
+            `);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log(`
+            QuizWebApi connection testing failed
+            ====================================
+            Error Request: ${error.message}
+            `);
+        }
+        console.log("Error config", error.config);
     }
 }

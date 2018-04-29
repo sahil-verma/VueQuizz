@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VueQuizzWebApi.Models;
 
 namespace VueQuizzWebApi.Controllers
 {
@@ -11,11 +12,23 @@ namespace VueQuizzWebApi.Controllers
     [Route("api/Questions")]
     public class QuestionsController : Controller
     {
-        // GET api/values
+        // GET api/questions
         [HttpGet]
-        public string Get()
+        public IEnumerable<Question> Get()
         {
-            return "VueQuizz Web Api";
+            // serve a list of questions
+
+            return new Question[] {
+                new Question() { Text = "Hello"}, 
+                new Question() { Text = "Bye"}
+            };
+        }
+
+        // GET api/questions/test
+        [HttpGet("test")]
+        public string Test()
+        {
+            return "VueQuizz Web Api test route";
         }
 
         // POST api/values
