@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace VueQuizzWebApi
 {
@@ -34,6 +35,9 @@ namespace VueQuizzWebApi
                 .AllowAnyMethod()
                 .AllowAnyHeader();
             }));
+
+            // configure DbContext to use an in memory database
+            services.AddDbContext<QuizContext>(options => options.UseInMemoryDatabase("quiz"));
             services.AddMvc();
         }
 
