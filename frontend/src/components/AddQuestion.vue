@@ -39,7 +39,7 @@ export default class AddQuestion extends Vue {
 
   // onClick event handler for the AddQuestionButton
   addButtonClick (): void {
-    console.dir(this.question)
+    this.quizApi.postQuestion(this.question);
   }
   
 }
