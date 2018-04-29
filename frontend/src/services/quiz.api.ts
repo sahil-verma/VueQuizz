@@ -12,7 +12,7 @@ export class QuizApiService {
         });
 
         // test connection on creation
-        this.testConnection();
+        //this.testConnection();
     }
 
     // TEST: testing api connection
