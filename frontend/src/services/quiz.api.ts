@@ -28,7 +28,7 @@ export class QuizApiService {
     }
 
     //GET: get a list of questions
-    getQuestions(question:any) {
+    getQuestions() {
         return this.quizAPI.get('questions');
     }
 

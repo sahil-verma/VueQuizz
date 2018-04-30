@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VueQuizzWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VueQuizzWebApi.Controllers
 {
@@ -24,8 +25,7 @@ namespace VueQuizzWebApi.Controllers
         [HttpGet]
         public IEnumerable<Question> Get()
         {
-            // serve a list of questions
-
+            // return list of questions
             return DBContext.Questions;
         }
 
@@ -36,13 +36,35 @@ namespace VueQuizzWebApi.Controllers
             return "VueQuizz Web Api test route";
         }
 
-        // POST api/values
+        // POST api/questions
         [HttpPost]
-        public void Post([FromBody]Question question)
+        public IActionResult Post([FromBody]Question question)
         {
-            // Add a test question
-            this.DBContext.Questions.Add(question);
-            this.DBContext.SaveChanges();
+            try
+            {
+                // Add a test question
+                this.DBContext.Questions.Add(question);
+                this.DBContext.SaveChanges();
+                return Ok(question);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Adding the question failed");
+            }
+            
+        }
+
+        // PUT api/questions/
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]Question question)
+        {
+            if (id == question.ID)
+            {
+                DBContext.Entry(question).State = EntityState.Modified;
+                return Ok(question);
+            }
+
+            return BadRequest("Editing the question failed");
         }
     }
 }
