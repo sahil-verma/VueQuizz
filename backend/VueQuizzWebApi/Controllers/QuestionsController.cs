@@ -66,5 +66,18 @@ namespace VueQuizzWebApi.Controllers
 
             return BadRequest("Editing the question failed");
         }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id, [FromBody]Question questionData)
+        {
+            if (id == questionData.ID)
+                return BadRequest("Question ID's don't match. Question not deleted.");
+
+            var question = this.DBContext.Questions.SingleOrDefault(q => q.ID == id);
+            this.DBContext.Questions.Remove(question);
+            this.DBContext.SaveChanges();
+            return Ok(question);
+        }
     }
 }
