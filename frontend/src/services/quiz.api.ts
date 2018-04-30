@@ -12,14 +12,14 @@ export class QuizApiService {
         });
 
         // test connection on creation
-        this.testConnection();
+        //this.testConnection();
     }
 
     // TEST: testing api connection
     testConnection (): void {
         // GET: making a test get request
         this.quizAPI.get('questions/test')
-        .then((response:any) => console.log(`
+        .then((response: any) => console.log(`
             QuizWebApi test connection successful
             ==========================
             Test response: ${response.data}
@@ -27,15 +27,36 @@ export class QuizApiService {
         .catch((error: any) => this.handleRequestErrors(error));
     }
 
-    //POST: post a question
-    postQuestion(question: Object) {
-        console.log("Posting a new question");
-        this.quizAPI.post('questions', question)
-        .then((response:any) => console.log("Response status", response.status))
-        .catch((error:any) => this.handleRequestErrors(error));
+    //GET: get a list of questions
+    getQuestions() {
+        return this.quizAPI.get('questions');
     }
 
-    handleRequestErrors(error:any) {
+    //POST: post a question
+    postQuestion(question: any) {
+        console.log("Posting a new question");
+        return this.quizAPI.post('questions', question)
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    //PUT: make a put request
+    putQuestion(question: any) {
+        console.log("Editing the question", question);
+        return this.quizAPI.put(`questions/${question.id}`, question)
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    //DELETE: delete a question
+    deleteQuestion(question: any) {
+        console.log("Deleting the question", question);
+        return this.quizAPI.delete(`questions/${question.id}`)
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    handleRequestErrors(error: any) {
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx

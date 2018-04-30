@@ -2,6 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/" class="route-link-item">Home</router-link>
+      <router-link to="/quiz/questions" class="route-link-item">Questions</router-link>
+      <router-link to="/quiz/add-question" class="route-link-item">Add Question</router-link>
     </div>
     <router-view/>
   </div>
@@ -10,6 +12,9 @@
 <style lang="scss">
 html, body {
   height: 100%;
+  height: -moz-available;          
+  height: -webkit-fill-available;  
+  height: fill-available;
 }
 body {
   font-family: 'Montserrat', sans-serif;
@@ -26,6 +31,7 @@ body {
 
 #nav {
   padding: 30px;
+  text-align: center;
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -36,6 +42,7 @@ body {
     &.router-link-exact-active {
       color: #42b983;
     }
+    padding: 0 10px;
   }
 }
 </style>
