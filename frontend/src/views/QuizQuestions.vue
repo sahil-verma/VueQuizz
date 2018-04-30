@@ -32,28 +32,28 @@
                       <div class="columns is-multiline">
                         <div class="column is-half">
                           <label class="radio">
-                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            <input type="radio" name="question" v-if="showEditForm != question.id" v-on:click="setAnswer(question.id, question.correctAnswer)">
                             {{showEditForm != question.id ? question.correctAnswer : ""}}
                             <input type="text" name="correctAnswer" class="input" v-bind:value="question.correctAnswer" v-if="showEditForm == question.id">
                           </label>
                         </div>
                         <div class="column is-half">
                           <label class="radio">
-                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            <input type="radio" name="question" v-if="showEditForm != question.id" v-on:click="setAnswer(question.id, question.wrongAnswer1)">
                             {{showEditForm != question.id ? question.wrongAnswer1 : ""}}
                             <input type="text" name="wrongAnswer1" class="input" v-bind:value="question.wrongAnswer1" v-if="showEditForm == question.id">
                           </label>
                         </div>
                         <div class="column is-half">
                           <label class="radio">
-                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            <input type="radio" name="question" v-if="showEditForm != question.id" v-on:click="setAnswer(question.id, question.wrongAnswer1)">
                             {{showEditForm != question.id ? question.wrongAnswer2 : ""}}
                             <input type="text" name="wrongAnswer2" class="input" v-bind:value="question.wrongAnswer2" v-if="showEditForm == question.id">
                           </label>
                         </div>
                         <div class="column is-half">
                           <label class="radio">
-                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            <input type="radio" name="question" v-if="showEditForm != question.id" v-on:click="setAnswer(question.id, question.wrongAnswer1)">
                             {{showEditForm != question.id ? question.wrongAnswer3 : ""}}
                             <input type="text" name="wrongAnswer3" class="input" v-bind:value="question.wrongAnswer3" v-if="showEditForm == question.id">
                           </label>
@@ -90,9 +90,9 @@
           <td>
             <div class="field is-pulled-right">
               <p class="control">
-                <a class="button is-success">
+                <button class="button is-success" v-on:click.stop.prevent="checkScore">
                   Done
-                </a>
+                </button>
               </p>
             </div>
           </td>
@@ -109,6 +109,16 @@
         </tr>
       </tbody>
     </table>
+    <div id="scoreModal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box content">
+          <h1>{{userScore}}</h1>
+        </div>
+        
+      </div>
+      <button class="modal-close is-large" aria-label="close" v-on:click="closeModal"></button>
+    </div>
   </section>
 </template>
 
@@ -136,6 +146,8 @@ export default class QuizQuestions extends Vue {
     wrongAnswer2: "",
     wrongAnswer3: ""
   }
+  answersSelected: Array<Object> = [];
+  userScore: string = "";
 
   constructor() {
     super();
@@ -177,11 +189,63 @@ export default class QuizQuestions extends Vue {
     .then((res: any) => this.updateQuestionsList());
   }
 
+  setAnswer(id: number, answer: string) {
+    if(!this.answersSelected.hasOwnProperty(id)) {
+      Object.defineProperty(this.answersSelected, id, { value: answer, writable: true, enumerable: true});
+    } else {
+      this.answersSelected[id] = answer;
+    }
+  }
+
+  checkScore(): void {
+
+    // if done is pressed without completing the quiz
+    if (this.answersSelected.length - 1 === this.questions.length) {
+
+      let correctAnswers: number = 0;
+
+      this.questions.map((question: any) => {
+
+        if (question.correctAnswer === this.answersSelected[question.id]) {
+          // if answer selected is correct
+          correctAnswers++;
+        }
+
+      });
+
+      this.userScore = (correctAnswers === this.questions.length) ? 
+      `Hurray!!! You answered all questions correctly :D` : 
+      (correctAnswers !== 0) ? 
+      `You answered ${correctAnswers} out of ${this.questions.length} questions correctly!` : 
+      `Sorry! no answers were correct :( \n Please try again.`;
+
+      correctAnswers = 0;
+
+      let modal = document.getElementById('scoreModal');
+      if(modal != null) {
+        modal.classList.add("is-active");
+      }
+      
+    } else {
+      alert("Please complete all questions before submission.");
+    }
+
+    
+        
+  }
+
   displayEditForm(id: number): void {
     if(this.showEditForm != -1) {
       alert("Please save changes to proceed.");
     } else {
       this.showEditForm = id;
+    }
+  }
+
+  closeModal(): void {
+    let modal = document.getElementById('scoreModal');
+    if(modal != null) {
+      modal.classList.remove("is-active");
     }
   }
   
