@@ -146,13 +146,15 @@ export default class QuizQuestions extends Vue {
     wrongAnswer2: "",
     wrongAnswer3: ""
   }
-  answersSelected: Array<Object> = [];
+  answersSelected: Array<Object>;
   userScore: string = "";
 
   constructor() {
     super();
     // initialize an instance of QuizApiService
     this.quizApi = new QuizApiService;
+
+    this.answersSelected = [];
   }
 
   created(): void {
@@ -195,12 +197,17 @@ export default class QuizQuestions extends Vue {
     } else {
       this.answersSelected[id] = answer;
     }
+    console.log("creating", id);
   }
 
   checkScore(): void {
 
+    // filer out any empty elements
+    let numAnswersSelected = this.answersSelected.filter(x => x !== (undefined || null || '')).length;
+    console.log(this.answersSelected, this.questions);
+
     // if done is pressed without completing the quiz
-    if (this.answersSelected.length - 1 === this.questions.length) {
+    if (numAnswersSelected === this.questions.length) {
 
       let correctAnswers: number = 0;
 
@@ -229,8 +236,6 @@ export default class QuizQuestions extends Vue {
     } else {
       alert("Please complete all questions before submission.");
     }
-
-    
         
   }
 

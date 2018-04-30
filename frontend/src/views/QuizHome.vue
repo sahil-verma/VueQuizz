@@ -1,7 +1,7 @@
 <template>
   <div id="question-quiz" class="containter has-text-centered">
     <h1 class="title">VueQuizz</h1>
-    <h2 class="subtitle">An Aamazingly Awesome Quiz</h2>
+    <h2 class="subtitle">An Aamazingly Awesome Quiz 👨‍🏫</h2>
     <QuizQuestions />
   </div>
 </template>
