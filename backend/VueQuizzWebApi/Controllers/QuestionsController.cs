@@ -69,13 +69,16 @@ namespace VueQuizzWebApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromBody]Question questionData)
+        public IActionResult Delete(int id)
         {
-            if (id == questionData.ID)
-                return BadRequest("Question ID's don't match. Question not deleted.");
 
             var question = this.DBContext.Questions.SingleOrDefault(q => q.ID == id);
             this.DBContext.Questions.Remove(question);
+
+            if (question == null)
+            {
+                return BadRequest("Not a valid question id");
+            }
             this.DBContext.SaveChanges();
             return Ok(question);
         }

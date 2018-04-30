@@ -33,7 +33,7 @@ export class QuizApiService {
     }
 
     //POST: post a question
-    postQuestion(question: Object) {
+    postQuestion(question: any) {
         console.log("Posting a new question");
         return this.quizAPI.post('questions', question)
         .then((response: any) => console.log("Response status", response.status))
@@ -41,7 +41,7 @@ export class QuizApiService {
     }
 
     //PUT: make a put request
-    putQuestion(question: Object) {
+    putQuestion(question: any) {
         console.log("Editing the question", question);
         return this.quizAPI.put(`questions/${question.id}`, question)
         .then((response: any) => console.log("Response status", response.status))
@@ -49,9 +49,9 @@ export class QuizApiService {
     }
 
     //DELETE: delete a question
-    deleteQuestion(question: Object) {
+    deleteQuestion(question: any) {
         console.log("Deleting the question", question);
-        return this.quizAPI.delete(`questions/${question.id}`, question)
+        return this.quizAPI.delete(`questions/${question.id}`)
         .then((response: any) => console.log("Response status", response.status))
         .catch((error: any) => this.handleRequestErrors(error));
     }

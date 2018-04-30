@@ -20,53 +20,70 @@
       <tbody>
         <tr v-for="question in questions" v-if="questions.length > 0">
           <td>
-            <div class="card">
-              <div class="card-header">
-                {{question.text}}
-              </div>
-              <div class="card-content">
-                <div class="field">
-                  <div class="control" style="width:60%">
-                    <div class="columns is-multiline">
-                      <div class="column is-half">
-                        <label class="radio">
-                          <input type="radio" name="question">
-                          {{question.correctAnswer}}
-                        </label>
-                      </div>
-                      <div class="column is-half">
-                        <label class="radio">
-                          <input type="radio" name="question">
-                          {{question.wrongAnswer1}}
-                        </label>
-                      </div>
-                      <div class="column is-half">
-                        <label class="radio">
-                          <input type="radio" name="question">
-                          {{question.wrongAnswer2}}
-                        </label>
-                      </div>
-                      <div class="column is-half">
-                        <label class="radio">
-                          <input type="radio" name="question">
-                          {{question.wrongAnswer3}}
-                        </label>
+            <form id="addQuestionForm" @submit="editQuestion">
+              <div class="card">
+                <div class="card-header">
+                  {{(showEditForm != question.id) ? question.text : ""}}
+                  <input name="questionText" class="input" v-bind:value="question.text" v-if="showEditForm == question.id">
+                </div>
+                <div class="card-content">
+                  <div class="field">
+                    <div class="control" style="width:60%">
+                      <div class="columns is-multiline">
+                        <div class="column is-half">
+                          <label class="radio">
+                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            {{showEditForm != question.id ? question.correctAnswer : ""}}
+                            <input type="text" name="correctAnswer" class="input" v-bind:value="question.correctAnswer" v-if="showEditForm == question.id">
+                          </label>
+                        </div>
+                        <div class="column is-half">
+                          <label class="radio">
+                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            {{showEditForm != question.id ? question.wrongAnswer1 : ""}}
+                            <input type="text" name="wrongAnswer1" class="input" v-bind:value="question.wrongAnswer1" v-if="showEditForm == question.id">
+                          </label>
+                        </div>
+                        <div class="column is-half">
+                          <label class="radio">
+                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            {{showEditForm != question.id ? question.wrongAnswer2 : ""}}
+                            <input type="text" name="wrongAnswer2" class="input" v-bind:value="question.wrongAnswer2" v-if="showEditForm == question.id">
+                          </label>
+                        </div>
+                        <div class="column is-half">
+                          <label class="radio">
+                            <input type="radio" name="question" v-if="showEditForm != question.id">
+                            {{showEditForm != question.id ? question.wrongAnswer3 : ""}}
+                            <input type="text" name="wrongAnswer3" class="input" v-bind:value="question.wrongAnswer3" v-if="showEditForm == question.id">
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card-footer" v-if="editMode">
-                <div class="field is-grouped">
+                <div class="field is-grouped" v-if="showEditForm != question.id">
                   <div class="control">
-                    <button class="button is-link"><i class="fas fa-edit"></i>Edit</button>
+                    <button class="button is-link" v-on:click.stop.prevent="displayEditForm(question.id)"><i class="fas fa-edit"></i>Edit</button>
                   </div>
                   <div class="control">
-                    <button class="button is-danger"><i class="fas fa-trash-alt"></i>Delete</button>
+                    <button class="button is-danger" v-on:click.stop.prevent="deleteForm(question)"><i class="fas fa-trash-alt"></i>Delete</button>
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="field is-grouped" v-if="showEditForm == question.id">
+                    <div class="control">
+                      <button class="button is-info" type="submit"><i class="fas fa-edit"></i>Submit</button>
+                    </div>
+                    <div class="control">
+                      <button class="button is-danger" v-on:click.stop.prevent="showEditForm = -1; editMode = false"><i class="fas fa-trash-alt"></i>Cancel</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div> 
+            </form>
           </td>
         </tr>
         <tr v-if="questions.length > 0">
@@ -110,6 +127,7 @@ export default class QuizQuestions extends Vue {
   questions: any = [];
   editMode: boolean = false;
   showAddQuestionForm = false;
+  showEditForm: number = 90;
 
   constructor() {
     super();
@@ -128,6 +146,21 @@ export default class QuizQuestions extends Vue {
       .catch((error: any) => this.quizApi.handleRequestErrors(error));
   }
 
+  editQuestion(e: any): void {
+    e.preventDefault();
+    
+  }
+
+  deleteForm(question: any): void {
+    this.quizApi.deleteQuestion(question)
+    .then((res: any) => this.updateQuestionsList());
+  }
+
+  displayEditForm(id: number): void {
+    this.showEditForm = id;
+    console.log("ques id", id);
+    console.log("shoEditId", this.showEditForm);
+  }
   
 }
 </script>
