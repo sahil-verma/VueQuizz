@@ -11,7 +11,7 @@
 
 <style lang="scss">
 html, body {
-  height: 100%;
+  height: fit-content;
 }
 body {
   font-family: 'Montserrat', sans-serif;

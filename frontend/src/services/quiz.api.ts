@@ -19,7 +19,7 @@ export class QuizApiService {
     testConnection (): void {
         // GET: making a test get request
         this.quizAPI.get('questions/test')
-        .then((response:any) => console.log(`
+        .then((response: any) => console.log(`
             QuizWebApi test connection successful
             ==========================
             Test response: ${response.data}
@@ -36,11 +36,11 @@ export class QuizApiService {
     postQuestion(question: Object) {
         console.log("Posting a new question");
         this.quizAPI.post('questions', question)
-        .then((response:any) => console.log("Response status", response.status))
-        .catch((error:any) => this.handleRequestErrors(error));
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
     }
 
-    handleRequestErrors(error:any) {
+    handleRequestErrors(error: any) {
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
