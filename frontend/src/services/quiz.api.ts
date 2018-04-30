@@ -8,7 +8,7 @@ export class QuizApiService {
     constructor() {
         // instansiate the axios instance for making api requests
         this.quizAPI = axios.create({
-            baseURL: 'http://localhost:32490/api/'
+            baseURL: 'http://localhost:5000/api/'
         });
 
         // test connection on creation
@@ -25,6 +25,11 @@ export class QuizApiService {
             Test response: ${response.data}
             `))
         .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    //GET: get a list of questions
+    getQuestions(question:any) {
+        return this.quizAPI.get('questions');
     }
 
     //POST: post a question

@@ -26,10 +26,7 @@ namespace VueQuizzWebApi.Controllers
         {
             // serve a list of questions
 
-            return new Question[] {
-                new Question() { Text = "Hello"}, 
-                new Question() { Text = "Bye"}
-            };
+            return DBContext.Questions;
         }
 
         // GET api/questions/test
