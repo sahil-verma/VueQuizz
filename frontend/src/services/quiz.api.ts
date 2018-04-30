@@ -8,7 +8,7 @@ export class QuizApiService {
     constructor() {
         // instansiate the axios instance for making api requests
         this.quizAPI = axios.create({
-            baseURL: 'http://localhost:5000/api/'
+            baseURL: 'http://localhost:32490/api/'
         });
 
         // test connection on creation
@@ -35,7 +35,23 @@ export class QuizApiService {
     //POST: post a question
     postQuestion(question: Object) {
         console.log("Posting a new question");
-        this.quizAPI.post('questions', question)
+        return this.quizAPI.post('questions', question)
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    //PUT: make a put request
+    putQuestion(question: Object) {
+        console.log("Editing the question", question);
+        return this.quizAPI.put(`questions/${question.id}`, question)
+        .then((response: any) => console.log("Response status", response.status))
+        .catch((error: any) => this.handleRequestErrors(error));
+    }
+
+    //DELETE: delete a question
+    deleteQuestion(question: Object) {
+        console.log("Deleting the question", question);
+        return this.quizAPI.delete(`questions/${question.id}`, question)
         .then((response: any) => console.log("Response status", response.status))
         .catch((error: any) => this.handleRequestErrors(error));
     }

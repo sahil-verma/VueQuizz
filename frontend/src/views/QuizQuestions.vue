@@ -9,7 +9,8 @@
                 <h1>Questions</h1>
               </div>
               <div class="level-right" v-if="questions.length > 0">
-                <button class="button is-danger" v-on:click.stop.prevent="editMode = !editMode"><i class="fas fa-edit" style="padding-right:0 !important"></i></button>
+                <router-link to="/quiz/add-question" class="button is-primary" title="Add a new question"><i class="fas fa-plus" style="padding-right:0 !important"></i></router-link>
+                <button class="button is-danger" v-on:click.stop.prevent="editMode = !editMode" title="Edit question"><i class="fas fa-edit" style="padding-right:0 !important"></i></button>
               </div>
             </nav>
             
@@ -99,6 +100,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 // import Questions API Service handler
 import { QuizApiService } from '../services/quiz.api';
+import AddQuestion from '@/components/AddQuestion.vue';
 
 @Component
 export default class QuizQuestions extends Vue {
@@ -107,6 +109,7 @@ export default class QuizQuestions extends Vue {
   quizApi: QuizApiService;
   questions: any = [];
   editMode: boolean = false;
+  showAddQuestionForm = false;
 
   constructor() {
     super();
@@ -116,6 +119,10 @@ export default class QuizQuestions extends Vue {
 
   created(): void {
     // get the list of questions
+    this.updateQuestionsList();
+  }
+
+  updateQuestionsList(): void {
     this.quizApi.getQuestions()
       .then((response: any) => this.questions = response.data)
       .catch((error: any) => this.quizApi.handleRequestErrors(error));
