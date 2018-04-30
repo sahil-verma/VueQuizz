@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container" v-if="showAddQuestionForm">
     <div id="add-form">
       <div class="field">
         <div class="control">
@@ -44,6 +44,12 @@
       </div>
     </div>
   </section>
+  <section class="container" v-else-if="showSuccessMessage">
+    <div class="box has-text-centered">
+      <p><strong>Your question was added successfully!</strong></p>
+      <router-link to="/quiz/questions" class="button is-success">All Questions</router-link>
+    </div>
+  </section>
 </template>
 
 
@@ -51,6 +57,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 // import Questions API Service handler
 import { QuizApiService } from '../services/quiz.api'
+import { fail } from 'assert';
 
 @Component
 export default class AddQuestion extends Vue {
@@ -58,6 +65,8 @@ export default class AddQuestion extends Vue {
   // declare class properties
   question: Object;
   quizApi: QuizApiService;
+  showAddQuestionForm: boolean = true;
+  showSuccessMessage: boolean = false;
 
   constructor() {
     super();
@@ -74,6 +83,8 @@ export default class AddQuestion extends Vue {
   // onClick event handler for the AddQuestionButton
   addButtonClick (): void {
     this.quizApi.postQuestion(this.question);
+    this.showAddQuestionForm = false;
+    this.showSuccessMessage = true;
   }
   
 }
