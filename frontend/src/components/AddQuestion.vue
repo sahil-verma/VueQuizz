@@ -14,14 +14,26 @@
       </div>
 
       <div class="field">
-        <div class="control">
-          <input id="answer-input-box" class="input" type="text" placeholder="Enter a wrong answer here">
+        <div class="help is-dark is-pulled-left">
+          <p>Please enter three wrong answers below:</p>
         </div>
       </div>
 
       <div class="field">
         <div class="control">
-          <input id="answer-input-box" class="input" type="text" placeholder="Enter a wrong answer here">
+          <input id="answer-input-box" class="input" type="text" placeholder="Wrong answer 1" v-model="question.wrongAnswer1">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input id="answer-input-box" class="input" type="text" placeholder="Wrong answer 2" v-model="question.wrongAnswer2">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input id="answer-input-box" class="input" type="text" placeholder="Wrong answer 3" v-model="question.wrongAnswer3">
         </div>
       </div>
 
@@ -31,9 +43,6 @@
         </div>
       </div>
     </div>
-    
-    
-    
   </section>
 </template>
 
@@ -86,12 +95,27 @@ section {
   align-items: center;
   width: fit-content;
   padding: 1em;
-  background-color: rgba($color: #ffffff, $alpha: 0.5);
+  background-color: rgba($color: #A59A84, $alpha: 0.2);
   border-radius: 3px;
 
   &:hover {
       box-shadow: 0px 0px 3px rgba($color: #000000, $alpha: 0.3);
     }
+
+  & input {
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #666;
+        opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #666;
+    }
+
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        color: #666
+    }
+  }  
 
   & #question-input-box {
       width: 50vw;
