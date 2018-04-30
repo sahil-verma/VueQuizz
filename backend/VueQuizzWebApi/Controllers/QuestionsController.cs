@@ -56,12 +56,24 @@ namespace VueQuizzWebApi.Controllers
 
         // PUT api/questions/
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Question question)
+        public IActionResult Put(int id, [FromBody]Question newQuestionData)
         {
-            if (id == question.ID)
+            if (id == newQuestionData.ID)
             {
-                DBContext.Entry(question).State = EntityState.Modified;
-                return Ok(question);
+                var question = DBContext.Questions.SingleOrDefault(q => q.ID == id);
+
+                if (question != null)
+                {
+                    question.Text = newQuestionData.Text;
+                    question.CorrectAnswer = newQuestionData.CorrectAnswer;
+                    question.WrongAnswer1 = newQuestionData.WrongAnswer1;
+                    question.WrongAnswer2 = newQuestionData.WrongAnswer2;
+                    question.WrongAnswer3 = newQuestionData.WrongAnswer3;
+
+                    DBContext.SaveChanges();
+                    return Ok(question);
+                }
+                
             }
 
             return BadRequest("Editing the question failed");

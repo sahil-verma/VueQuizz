@@ -24,7 +24,7 @@
               <div class="card">
                 <div class="card-header">
                   {{(showEditForm != question.id) ? question.text : ""}}
-                  <input name="questionText" class="input" v-bind:value="question.text" v-if="showEditForm == question.id">
+                  <input name="questionText" class="input" type="text" v-bind:value="question.text" v-if="showEditForm == question.id">
                 </div>
                 <div class="card-content">
                   <div class="field">
@@ -75,7 +75,7 @@
                 <div v-else>
                   <div class="field is-grouped" v-if="showEditForm == question.id">
                     <div class="control">
-                      <button class="button is-info" type="submit"><i class="fas fa-edit"></i>Submit</button>
+                      <button class="button is-info" type="submit" v-on:click="questionEdited.id = question.id"><i class="fas fa-edit"></i>Submit</button>
                     </div>
                     <div class="control">
                       <button class="button is-danger" v-on:click.stop.prevent="showEditForm = -1; editMode = false"><i class="fas fa-trash-alt"></i>Cancel</button>
@@ -127,7 +127,15 @@ export default class QuizQuestions extends Vue {
   questions: any = [];
   editMode: boolean = false;
   showAddQuestionForm = false;
-  showEditForm: number = 90;
+  showEditForm: number = -1;
+  questionEdited: any = {
+    id: -1,
+    text: "",
+    correctAnswer: "",
+    wrongAnswer1: "",
+    wrongAnswer2: "",
+    wrongAnswer3: ""
+  }
 
   constructor() {
     super();
@@ -148,7 +156,20 @@ export default class QuizQuestions extends Vue {
 
   editQuestion(e: any): void {
     e.preventDefault();
-    
+    let form: any = e.target;
+
+    this.questionEdited.text = form.questionText.value;
+    this.questionEdited.correctAnswer = form.correctAnswer.value;
+    this.questionEdited.wrongAnswer1 =form.wrongAnswer1.value;
+    this.questionEdited.wrongAnswer2 =form.wrongAnswer2.value;
+    this.questionEdited.wrongAnswer3 =form.wrongAnswer3.value;
+
+    this.quizApi.putQuestion(this.questionEdited)
+    .then((res: any) => {
+      this.editMode = false;
+      this.showEditForm = -1;
+      this.updateQuestionsList();
+    });
   }
 
   deleteForm(question: any): void {
@@ -157,9 +178,11 @@ export default class QuizQuestions extends Vue {
   }
 
   displayEditForm(id: number): void {
-    this.showEditForm = id;
-    console.log("ques id", id);
-    console.log("shoEditId", this.showEditForm);
+    if(this.showEditForm != -1) {
+      alert("Please save changes to proceed.");
+    } else {
+      this.showEditForm = id;
+    }
   }
   
 }
